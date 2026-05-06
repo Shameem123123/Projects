@@ -1,0 +1,138 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #eef2f7, #dbeafe);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container{
+    width: 100%;
+    max-width: 750px;
+    padding: 20px;
+}
+
+.quiz-card{
+    background: white;
+    border-radius: 22px;
+    padding: 45px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    animation: fadeIn 0.3s ease;
+}
+
+.question-count{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.question-text{
+    font-size: 34px;
+    font-weight: bold;
+    color: #0f172a;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.option{
+    display: flex;
+    align-items: center;
+    padding: 18px 20px;
+    border: 2px solid #dbe3ec;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 18px;
+    background: #fafcff;
+}
+
+.option:hover{
+    border-color: #3b82f6;
+    background: #eff6ff;
+    transform: translateY(-2px);
+}
+
+.option.selected{
+    border-color: #2563eb;
+    background: #dbeafe;
+}
+
+.option input[type="radio"]{
+    margin-right: 16px;
+    transform: scale(1.3);
+}
+
+.button-group{
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.skip-btn{
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    color: #64748b;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.skip-btn:hover{
+    background: #f1f5f9;
+}
+
+.submit-btn{
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-btn:hover:enabled{
+    background: #1d4ed8;
+}
+
+.submit-btn:disabled{
+    background: #94a3b8;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
