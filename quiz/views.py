@@ -6,19 +6,29 @@ def start_quiz(request):
 
     request.session['score'] = 0
 
+    # Randomize questions ONCE
+    question_ids = list(
+        Question.objects.order_by('?').values_list('id', flat=True)
+    )
+
+    request.session['question_ids'] = question_ids
+
     return redirect('question', index=0)
 
 
 def question_view(request, index):
 
-    questions = list(Question.objects.all())
+    question_ids = request.session.get('question_ids', [])
 
-    total_questions = len(questions)
+    total_questions = len(question_ids)
 
+    # Quiz finished
     if index >= total_questions:
         return redirect('result')
 
-    question = questions[index]
+    question_id = question_ids[index]
+
+    question = Question.objects.get(id=question_id)
 
     if request.method == 'POST':
 
@@ -46,7 +56,9 @@ def result_view(request):
 
     score = request.session.get('score', 0)
 
-    total_questions = Question.objects.count()
+    total_questions = len(
+        request.session.get('question_ids', [])
+    )
 
     context = {
         'score': score,
