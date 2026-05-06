@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            padding: 40px;
+        }
+
+        .question-box{
+            border: 1px solid gray;
+            padding: 20px;
+            width: 500px;
+        }
+
+        button{
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #submitBtn:disabled{
+            background-color: gray;
+            cursor: not-allowed;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h2>Question {{ index }} of {{ total }}</h2>
+
+    <div class="question-box">
+
+        <h3>{{ question.question_text }}</h3>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% for choice in question.choice_set.all %}
+
+                <input type="radio"
+                       name="choice"
+                       value="{{ choice.id }}"
+                       onclick="enableSubmit()">
+
+                {{ choice.choice_text }}
+
+                <br><br>
+
+            {% endfor %}
+
+            <button type="submit"
+                    id="submitBtn"
+                    disabled>
+                Submit
+            </button>
+
+            <button type="submit">
+                Next
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+
+        function enableSubmit(){
+
+            document.getElementById('submitBtn').disabled = false;
+        }
+
+    </script>
+
+</body>
+</html>
