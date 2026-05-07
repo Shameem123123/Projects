@@ -1,13 +1,168 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Result</title>
+    <title>Quiz Result</title>
+
+    <link rel="stylesheet" href="{% static 'quiz/style.css' %}">
 </head>
+
 <body>
 
-    <h1>Quiz Completed</h1>
+<div class="container">
 
-    <h2>Your Score: {{ score }} / {{ total }}</h2>
+    <!-- RESULT CARD -->
+
+    <div class="quiz-card">
+
+        <div class="question-count">
+            Quiz Completed
+        </div>
+
+        <div class="question-text">
+            Your Score
+        </div>
+
+        <div class="result-score">
+
+            <span class="score-main">
+                {{ score }}
+            </span>
+
+            <span class="score-divider">
+                /
+            </span>
+
+            <span class="score-total">
+                {{ total }}
+            </span>
+
+        </div>
+
+        <div class="result-message">
+
+            {% if score == total %}
+
+                Excellent Work 🎉
+
+            {% elif score >= 1 %}
+
+                Good Job 👍
+
+            {% else %}
+
+                Keep Practicing 📚
+
+            {% endif %}
+
+        </div>
+
+        <div class="button-group">
+
+            <a href="/">
+
+                <button class="skip-btn">
+                    Home
+                </button>
+
+            </a>
+
+            <button class="submit-btn"
+                    onclick="scrollToReview()">
+
+                Review Answers
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- REVIEW SECTION -->
+
+    <div id="review-section">
+
+        {% for item in review_data %}
+
+    <div class="quiz-card review-card
+
+        {% if item.selected_choice_id == None %}
+         skipped-card
+        {% endif %}
+
+    ">
+
+            <div class="question-count">
+                Question {{ forloop.counter }}
+            </div>
+
+            {% if item.selected_choice_id == None %}
+
+     <div class="skipped-label">
+        ⏭ Question Skipped
+     </div>
+
+{% endif %}
+
+            <div class="question-text review-question">
+                {{ item.question.question_text }}
+            </div>
+
+            <div class="options">
+
+                {% for choice in item.choices %}
+
+                    {% if choice.id == item.correct_choice_id %}
+
+                        <div class="option correct-option">
+
+                            ✅ {{ choice.choice_text }}
+
+                        </div>
+
+                    {% elif choice.id == item.selected_choice_id %}
+
+                        <div class="option wrong-option">
+
+                            ❌ {{ choice.choice_text }}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="option">
+
+                            {{ choice.choice_text }}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+
+    function scrollToReview(){
+
+        document.getElementById('review-section')
+            .scrollIntoView({
+                behavior: 'smooth'
+            });
+
+    }
+
+</script>
 
 </body>
 </html>

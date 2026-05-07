@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+
+    <link rel="stylesheet" href="{% static 'quiz/style.css' %}">
+</head>
+
+<body class="home-body">
+
+    <div class="background-words">
+
+        <span>Python</span>
+        <span>Django</span>
+        <span>Quiz</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Backend</span>
+        <span>Frontend</span>
+        <span>Programming</span>
+        <span>Database</span>
+        <span>Code</span>
+        <span>Developer</span>
+
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="home-container">
+
+        <div class="home-card">
+
+            <h1 class="home-title">
+                Quiz Master
+            </h1>
+
+            <p class="home-subtitle">
+                Test your knowledge with randomly generated questions.
+            </p>
+
+            <a href="/start/">
+
+                <button class="start-btn">
+                    Start Quiz
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
